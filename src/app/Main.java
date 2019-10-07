@@ -34,38 +34,56 @@ public class Main {
    */
   public static String decode(String word)
   {
-	  String newWord = "";
-	  newWord = word.replaceAll("ingy", "");
-	  newWord = newWord.replaceAll("ent", "");
-	  return newWord;
-		/*
-		 * String newWord = ""; int vowelcount = 0; int firstvowel = 0; int
-		 * firstvowelcount = - 1;
-		 * 
-		 * for(int i = 0; i < word.length(); i++) { if(word.charAt(i) == 'a' ||
-		 * word.charAt(i) == 'e' || word.charAt(i) == 'i'|| word.charAt(i) == 'o' ||
-		 * word.charAt(i) == 'u') { firstvowelcount++; } } if(firstvowelcount <= 2) {
-		 * newWord = word.substring(0, word.length()-4); } else { newWord = word; }
-		 * 
-		 * for(int i = 0; i < newWord.length(); i++) { if(word.charAt(i) == 'a' ||
-		 * word.charAt(i) == 'e' || word.charAt(i) == 'i'|| word.charAt(i) == 'o' ||
-		 * word.charAt(i) == 'u') { vowelcount++; if(vowelcount == 1) { firstvowel = i;
-		 * } } }
-		 * 
-		 * String newnewstring = "";
-		 * 
-		 * for(int x = 0; x <= firstvowel; x++) { newnewstring += newWord.charAt(x);
-		 * 
-		 * }
-		 * 
-		 * int skip = firstvowel+4;
-		 * 
-		 * for(int y = skip; y < newWord.length(); y++) { newnewstring +=
-		 * newWord.charAt(y); }
-		 * 
-		 * 
-		 * vowelcount = 0; firstvowel = 0; return newnewstring;
-		 */
+//	  String newWord = "";
+	  
+	  
+	  
+//		  newWord = word.replaceAll("ingy", ""); 
+//		  newWord = newWord.replaceAll("ent", ""); 
+//		  return newWord;
+		
+		  String newWord = ""; 
+		  int vowelcount = 0; 
+		  int firstvowel = 0; 
+		  int firstvowelcount = - 1;
+		  
+		  for(int i = 0; i < word.length(); i++) { if(word.charAt(i) == 'a' || word.charAt(i) == 'e' || word.charAt(i) == 'i'|| word.charAt(i) == 'o' ||word.charAt(i) == 'u') { firstvowelcount++; } } 
+		  if(firstvowelcount <= 2) 
+		  {
+			  newWord = word.substring(0, word.length()-4); 
+		  } 
+		  else { 
+			  newWord = word;
+			  }
+		  
+		  for(int i = 0; i < newWord.length(); i++) { if(word.charAt(i) == 'a' ||word.charAt(i) == 'e' || word.charAt(i) == 'i'|| word.charAt(i) == 'o' ||word.charAt(i) == 'u') 
+		  {
+			 vowelcount++; 
+		  if(vowelcount == 1) 
+		  { firstvowel = i;
+		  } 
+		  } 
+		  }
+		  
+		  String newnewstring = "";
+		  
+		  for(int x = 0; x <= firstvowel; x++) 
+		  { 
+			  newnewstring += newWord.charAt(x);
+		  
+		  }
+		  
+		  int skip = firstvowel+4;
+		  
+		  for(int y = skip; y < newWord.length(); y++) 
+		  { 
+			  newnewstring += newWord.charAt(y); }
+		  
+		  
+//		 vowelcount = 0; 
+//		 firstvowel = 0; 
+		 return newnewstring;
+		 
 	  
   }
 
