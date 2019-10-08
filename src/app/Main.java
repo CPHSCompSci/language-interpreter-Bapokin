@@ -2,6 +2,7 @@ package app;
 
 //import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -15,11 +16,16 @@ public class Main {
     
     //dkjasfljiejuy
     
-    for(int i = 0; i < 16; i++)
-    {
-    	System.out.println(decodeMessage(lex.list[i]));
-    }
+//    for(int i = 0; i < 16; i++)
+//    {
+//    	System.out.println(decodeMessage(lex.list[i]));
+//    }
     
+    
+    System.out.println(lex.translate("I rent bananas"));
+    System.out.println(decode(lex.translate("I rent bananas")));
+    
+    //System.out.println(decode(lex.translate("Hello")));
     
     encodeInput();
     decodeInput();
@@ -34,55 +40,46 @@ public class Main {
    */
   public static String decode(String word)
   {
-//	  String newWord = "";
+	  String newWord = "";
+	  char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
 	  
-	  
-	  
-//		  newWord = word.replaceAll("ingy", ""); 
-//		  newWord = newWord.replaceAll("ent", ""); 
-//		  return newWord;
-		
-		  String newWord = ""; 
-		  int vowelcount = 0; 
-		  int firstvowel = 0; 
-		  int firstvowelcount = - 1;
-		  
-		  for(int i = 0; i < word.length(); i++) { if(word.charAt(i) == 'a' || word.charAt(i) == 'e' || word.charAt(i) == 'i'|| word.charAt(i) == 'o' ||word.charAt(i) == 'u') { firstvowelcount++; } } 
-		  if(firstvowelcount <= 2) 
+	  if(word.endsWith("ingy"))
+	  {
+		  String word2 = word.substring(0, word.length()-4);
+		  boolean consonant = true;
+		  for (char v : vowels) 
 		  {
-			  newWord = word.substring(0, word.length()-4); 
-		  } 
-		  else { 
-			  newWord = word;
+			  if (word2.charAt(word2.length() - 1) == v) 
+	          {
+	                consonant = false;    
+	          }	      
+	      }
+		  if(consonant && !word2.endsWith("s"))
+		  {
+			  newWord = word2;
+		  }		  
+	  }
+	  int firstVowel = 0;
+	  for(int i = newWord.length()-1; i > 0; i--)
+	  {
+		  for(char v: vowels)
+		  {
+			  if(newWord.charAt(i) == v)
+			  {
+				  firstVowel = i;
 			  }
-		  
-		  for(int i = 0; i < newWord.length(); i++) { if(word.charAt(i) == 'a' ||word.charAt(i) == 'e' || word.charAt(i) == 'i'|| word.charAt(i) == 'o' ||word.charAt(i) == 'u') 
+		  }
+	  }
+	  if(newWord.length() >= 3)
+	  {
+		  if(newWord.substring(firstVowel+1, firstVowel+4).equals("ent"))
 		  {
-			 vowelcount++; 
-		  if(vowelcount == 1) 
-		  { firstvowel = i;
-		  } 
-		  } 
+			  newWord = newWord.replaceAll("ent", "");
 		  }
+	  }
 		  
-		  String newnewstring = "";
-		  
-		  for(int x = 0; x <= firstvowel; x++) 
-		  { 
-			  newnewstring += newWord.charAt(x);
-		  
-		  }
-		  
-		  int skip = firstvowel+4;
-		  
-		  for(int y = skip; y < newWord.length(); y++) 
-		  { 
-			  newnewstring += newWord.charAt(y); }
-		  
-		  
-//		 vowelcount = 0; 
-//		 firstvowel = 0; 
-		 return newnewstring;
+	  return newWord;
+	  
 		 
 	  
   }
@@ -95,24 +92,30 @@ public class Main {
   public static String decodeMessage(String message)
   {
 	  
-		/*
-		 * ArrayList<String> words = new ArrayList<String>(); ArrayList<Integer> space =
-		 * new ArrayList<Integer>();
-		 * 
-		 * for(int i = 0; i < message.length(); i++) { if(message.charAt(i) == ' ') {
-		 * space.add(i); } }
-		 * 
-		 * String finalString = "";
-		 * 
-		 * for(int i = 0; i < space.size(); i++) {
-		 * words.add(decode(message.substring(0,space.get(i)))); finalString +=
-		 * words.get(i); }
-		 */
-	  
+
+	  ArrayList<String> words = new ArrayList<String>();
+	  ArrayList<Integer> space = new ArrayList<Integer>();
+	  String newMessage = message + " ";
+	  for(int i = message.length()-1; i >= 0; i--)
+	  {
+		  if(message.charAt(i) == ' ')
+		  {
+			  space.add(i);
+			  words.add(message.substring(0,i));
+		  }
+	  }
+	  for(int i = 0; i < space.size(); i++)
+	  {
+		  words.add(message.substring(i,i+1));
+	  }
+	  for(int i = 0; i < words.size(); i++)
+	  {
+		 newMessage += decode(words.get(i));
+	  }
+
+	  return newMessage;
 	  
 	 
-	  
-	  return decode(message);
   }
   
   public static void encodeInput()
