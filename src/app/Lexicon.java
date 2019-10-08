@@ -1,7 +1,7 @@
 package app;
 
 public class Lexicon {
-    private String[] list;
+    public String[] list;
 
     public Lexicon() {
         list = new String[16];
