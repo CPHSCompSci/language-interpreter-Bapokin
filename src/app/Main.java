@@ -22,8 +22,10 @@ public class Main {
 //    }
     
     
-    System.out.println(lex.translate("I rent bananas"));
-    System.out.println(decode(lex.translate("I rent bananas")));
+//    System.out.println(lex.translate("I rent bananas"));
+//    System.out.println(decode(lex.translate("I rent bananas")));
+    
+    System.out.println(decode("deentclivityingy"));
     
     //System.out.println(decode(lex.translate("Hello")));
     
@@ -59,6 +61,10 @@ public class Main {
 			  newWord = word2;
 		  }		  
 	  }
+	  else
+	  {
+		  newWord = word;
+	  }
 	  int firstVowel = 0;
 	  for(int i = newWord.length()-1; i > 0; i--)
 	  {
@@ -70,6 +76,7 @@ public class Main {
 			  }
 		  }
 	  }
+
 	  if(newWord.length() >= 3)
 	  {
 		  if(newWord.substring(firstVowel+1, firstVowel+4).equals("ent"))
@@ -95,19 +102,23 @@ public class Main {
 
 	  ArrayList<String> words = new ArrayList<String>();
 	  ArrayList<Integer> space = new ArrayList<Integer>();
+	  space.add(0);
 	  String newMessage = message + " ";
-	  for(int i = message.length()-1; i >= 0; i--)
+	  for(int i = 0; i < newMessage.length()-1; i++)
 	  {
 		  if(message.charAt(i) == ' ')
 		  {
 			  space.add(i);
-			  words.add(message.substring(0,i));
 		  }
 	  }
-	  for(int i = 0; i < space.size(); i++)
+	  for(int i = 0; i < space.size()-1; i++)
 	  {
-		  words.add(message.substring(i,i+1));
+		  words.add(newMessage.substring(space.get(i),space.get(i+1)+1));
 	  }
+//	  for(String word : words)
+//	  {
+//		  System.out.println(word);
+//	  }
 	  for(int i = 0; i < words.size(); i++)
 	  {
 		 newMessage += decode(words.get(i));
