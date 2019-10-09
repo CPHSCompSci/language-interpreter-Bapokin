@@ -44,7 +44,11 @@ public class Main {
   {
 	  String newWord = "";
 	  char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
-	  
+	  if(word.endsWith(". ") || word.endsWith(", "))
+	  {
+		  word.replaceAll(". ", " ");
+		  word.replaceAll(", "," ");
+	  }
 	  if(word.endsWith("ingy"))
 	  {
 		  String word2 = word.substring(0, word.length()-4);
@@ -60,6 +64,18 @@ public class Main {
 		  {
 			  newWord = word2;
 		  }		  
+	  }
+	  else if(word.endsWith("ingy "))
+	  {
+		  String word2 = word.substring(0, word.length()-5);
+		  boolean consonant = true;
+		  for (char v : vowels) 
+		  {
+			  if (word2.charAt(word2.length() - 1) == v) 
+	          {
+	                consonant = false;    
+	          }	      
+	      }
 	  }
 	  else
 	  {
@@ -98,13 +114,18 @@ public class Main {
    */
   public static String decodeMessage(String message)
   {
-	  
+	  System.out.println(message);
+	  message.replaceAll(".", "");
+	  message.replaceAll(",", "");
 
+	  System.out.println(message);
 	  ArrayList<String> words = new ArrayList<String>();
 	  ArrayList<Integer> space = new ArrayList<Integer>();
 	  space.add(0);
-	  String newMessage = message + " ";
-	  for(int i = 0; i < newMessage.length()-1; i++)
+	  message = message + " ";
+	  System.out.println(message);
+	  String newMessage = "";
+	  for(int i = 0; i < message.length(); i++)
 	  {
 		  if(message.charAt(i) == ' ')
 		  {
@@ -113,17 +134,26 @@ public class Main {
 	  }
 	  for(int i = 0; i < space.size()-1; i++)
 	  {
-		  words.add(newMessage.substring(space.get(i),space.get(i+1)+1));
+		  words.add(message.substring(space.get(i),space.get(i+1)+1));
+		  System.out.println(i);
 	  }
-//	  for(String word : words)
-//	  {
-//		  System.out.println(word);
-//	  }
+	  for(String word : words)
+	  {
+		  System.out.println(word);
+	  }
 	  for(int i = 0; i < words.size(); i++)
 	  {
 		 newMessage += decode(words.get(i));
 	  }
-
+//	  for(String word: words)
+//	  {
+//		  if(word.endsWith("ingy ")) 
+//		  {
+//			  System.out.println("test");
+//			  word = decode();
+//		  }
+//		  newMessage += word;
+//	  }
 	  return newMessage;
 	  
 	 
