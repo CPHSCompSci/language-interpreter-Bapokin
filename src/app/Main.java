@@ -10,29 +10,10 @@ public class Main {
     // This is a test comment
     Lexicon lex = new Lexicon();
 
-		/*
-		 * String newWord = lex.translate("hhhhhhhhh"); System.out.println(newWord);
-		 */
-    
-    //dkjasfljiejuy
-    
-//    for(int i = 0; i < 16; i++)
-//    {
-//    	System.out.println(decodeMessage(lex.list[i]));
-//    }
-    
-    
-//    System.out.println(lex.translate("I rent bananas"));
-//    System.out.println(decode(lex.translate("I rent bananas")));
-    
-    System.out.println(decode("deentclivityingy"));
-    
-    //System.out.println(decode(lex.translate("Hello")));
     
     encodeInput();
     decodeInput();
     
-
   }
 
   /**
@@ -93,7 +74,7 @@ public class Main {
 		  }
 	  }
 
-	  if(newWord.length() >= 3)
+	  if(newWord.length() >= 4)
 	  {
 		  if(newWord.substring(firstVowel+1, firstVowel+4).equals("ent"))
 		  {
@@ -114,16 +95,13 @@ public class Main {
    */
   public static String decodeMessage(String message)
   {
-	  System.out.println(message);
-	  message.replaceAll(".", "");
-	  message.replaceAll(",", "");
+	  message = message.replaceAll("\\p{Punct}|\\d","");
+	  message = message.replaceAll("\\p{Punct}|\\d","");
 
-	  System.out.println(message);
 	  ArrayList<String> words = new ArrayList<String>();
 	  ArrayList<Integer> space = new ArrayList<Integer>();
 	  space.add(0);
 	  message = message + " ";
-	  System.out.println(message);
 	  String newMessage = "";
 	  for(int i = 0; i < message.length(); i++)
 	  {
@@ -134,13 +112,12 @@ public class Main {
 	  }
 	  for(int i = 0; i < space.size()-1; i++)
 	  {
-		  words.add(message.substring(space.get(i),space.get(i+1)+1));
-		  System.out.println(i);
+		  words.add(message.substring(space.get(i),space.get(i+1)));
 	  }
-	  for(String word : words)
-	  {
-		  System.out.println(word);
-	  }
+//	  for(String word : words)
+//	  {
+//		  System.out.println(word);
+//	  }
 	  for(int i = 0; i < words.size(); i++)
 	  {
 		 newMessage += decode(words.get(i));
@@ -163,9 +140,35 @@ public class Main {
   {
 	  System.out.println("What word/message would you like to encode?");
 	  Scanner input = new Scanner(System.in);
-	  String word = input.nextLine();
+	  String message = input.nextLine();
+	  
+	  message = message.replaceAll("\\p{Punct}|\\d","");
+	  message = message.replaceAll("\\p{Punct}|\\d","");
+
+	  ArrayList<String> words = new ArrayList<String>();
+	  ArrayList<Integer> space = new ArrayList<Integer>();
+	  space.add(0);
+	  message = message + " ";
+	  String newMessage = "";
+	  for(int i = 0; i < message.length(); i++)
+	  {
+		  if(message.charAt(i) == ' ')
+		  {
+			  space.add(i);
+		  }
+	  }
+	  for(int i = 0; i < space.size()-1; i++)
+	  {
+		  words.add(message.substring(space.get(i),space.get(i+1)));
+	  }
 	  Lexicon lex = new Lexicon();
-	  System.out.println(lex.translate(word));
+	  for(int i = 0; i < words.size(); i++)
+	  {
+		 newMessage += lex.translate(words.get(i));
+	  }
+	  
+	  
+	  System.out.println(newMessage);
   }
   
   public static void decodeInput()
